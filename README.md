@@ -34,4 +34,4 @@ npm run build
 
 ## License
 
-MIT © Norman Köhring <norman.koehring@fromatob.com>
+MIT © fromAtoB GmbH <norman.koehring@fromatob.com>
