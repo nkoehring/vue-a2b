@@ -1,5 +1,5 @@
 // greatest common denominator
-function gcd (a,b) {
+function gcd (a, b) {
   return b ? gcd(b, a % b) : a
 }
 
@@ -24,7 +24,7 @@ function getCandidates (variations) {
 
   return names.reduce((result, name, i) => {
     const n = Math.round(chances[i] / divisor)
-    for(let i = 0; i < n; i++) result.push(name)
+    for (let i = 0; i < n; i++) result.push(name)
     return result
   }, [])
 }
