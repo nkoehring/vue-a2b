@@ -34,26 +34,35 @@ function pickRandomlyFrom (array) {
   return array[index]
 }
 
+function getCookie (cookieName, testName) {
+  console.log("getCookie", cookieName, testName)
+  /* TODO */
+}
+
+function setCookie (cookieName, testName, winner) {
+  console.log("setCookie", cookieName, testName, winner)
+  /* TODO */
+}
+
 const VueSplitter = {
-  install (Vue) {
-    // Vue.directive('some-directive', (el, binding, vnode) => {})
-    Vue.component('split-test', {
+  install (Vue, options = {}) {
+    const componentName = options.component || 'split-test'
+    const cookieName = options.cookie || 'split-test'
+
+    Vue.component(componentName, {
       functional: true,
-      props: [ 'winner' ],
+      props: [ 'always', 'name' ],
       render (h, ctx) {
+        const name = ctx.props.name || ctx.parent.$options.name
+        if (!name) throw "Split Test Error: The test name is mandatory!"
+
         const variations = ctx.slots()
+        const winner = getCookie(cookieName, name)
+          || ctx.props.always
+          || pickRandomlyFrom(getCandidates(ctx.children))
 
-        const winner = ctx.props.winner
-          ? ctx.props.winner
-          : pickRandomlyFrom(getCandidates(ctx.children))
-
-        const variation = variations[winner]
-
-        // DEBUG
-        console.log('SPLIT', winner)
-        // END DEBUG
-
-        return variation
+        setCookie(cookieName, name, winner)
+        return variations[winner]
       }
     })
   }
