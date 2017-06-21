@@ -1,7 +1,15 @@
 function loadCookie (name) {
-  console.log("loadCookie", name)
-  /* TODO */
-  return {}
+  const cookieString = document.cookie
+  const cookieData = {}
+  cookieString.split(';').forEach(entry => {
+    if (entry.length) {
+      const [key, value] = entry.trim().split('=')
+      cookieData[key] = decodeURIComponent(value)
+    }
+  })
+
+  const data = cookieData[name] && JSON.parse(cookieData[name])
+  return data || {}
 }
 
 function loadLocalStorage (name) {
@@ -11,8 +19,12 @@ function loadLocalStorage (name) {
 }
 
 function saveCookie (name, data) {
-  console.log("saveCookie", name, data)
-  /* TODO */
+  const d = new Date()
+  d.setTime(d.getTime() + 30*24*3600*1000) // expires in one month
+  const options = `expires=${d.toUTCString()};path=/` // TODO: make configurable
+
+  data = encodeURIComponent(JSON.stringify(data))
+  document.cookie = `${name}=${data};${options}`
 }
 
 function saveLocalStorage (name, data) {
