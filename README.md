@@ -78,21 +78,15 @@ it might be deferred from the parent components name attribute.
 
 ### Cookie Name
 
-You can overwrite the name of the cookie, that stores the selected test group either per test:
-
-``` html
-<template>
-  <split-test cookie="theanswer" name="everthing" always="42">
-    <IsEveryThing slot="42" />
-    <CanSeeEveryThing slot="23" />
-  </split-test>
-</template>
-```
-
-or globally on initialization:
+You can set storage method and name on initialization. Supported methods are `cookie` (the default) and `localStorage`:
 
 ``` js
-Vue.use(VueAB, {cookie: 'project42'})
+Vue.use(VueAB, {
+  storage: {
+    method: 'localStorage',
+    name: 'project42'
+  }
+})
 ```
 
 ### Component Name
