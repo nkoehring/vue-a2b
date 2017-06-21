@@ -1,15 +1,17 @@
 function loadCookie (name) {
-  const cookieString = document.cookie
-  const cookieData = {}
-  cookieString.split(';').forEach(entry => {
-    if (entry.length) {
-      const [key, value] = entry.trim().split('=')
-      cookieData[key] = decodeURIComponent(value)
-    }
-  })
+  const entries = document.cookie.split(';')
+  const len = name.length
 
-  const data = cookieData[name] && JSON.parse(cookieData[name])
-  return data || {}
+  for (const i in entries) {
+    const entry = entries[i].trim()
+
+    if (entry.substr(0, len) === name) {
+      const value = decodeURIComponent( entry.slice(len + 1) )
+      return JSON.parse(value)
+    }
+  }
+
+  return {}
 }
 
 function loadLocalStorage (name) {
