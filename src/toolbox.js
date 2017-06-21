@@ -38,3 +38,43 @@ export function randomCandidate (variations) {
   const candidates = getCandidates(variations)
   return pickRandomlyFrom(candidates)
 }
+
+function daysToMicroSeconds (days) {
+  return days * 24 * 3600 * 1000
+}
+
+export function getCookie (name) {
+  const entries = document.cookie.split(';')
+  const len = name.length
+
+  for (const i in entries) {
+    const entry = entries[i].trim()
+
+    if (entry.substr(0, len) === name) {
+      const value = decodeURIComponent( entry.slice(len + 1) )
+      return JSON.parse(value)
+    }
+  }
+}
+
+export function writeCookie (name, data, expiry) {
+  const d = new Date()
+  d.setTime(d.getTime() + daysToMicroSeconds(expiry))
+
+  const options = `expires=${d.toUTCString()};path=/`
+  data = encodeURIComponent(JSON.stringify(data))
+  document.cookie = `${name}=${data};${options}`
+}
+
+export function getLocalStorage (name, expiry) {
+  const d = new Date()
+  d.setTime(d.getTime() + daysToMicroSeconds(expiry))
+  const entry = JSON.parse(localStorage.getItem(name))
+
+  return entry && entry.expires > d.getTime() ? entry : null
+}
+
+export function writeLocalStorage (name, value, expiry) {
+  value.expiry = new Date().getTime() + daysToMicroSeconds(expiry)
+  localStorage.setItem(name, JSON.stringify(value))
+}

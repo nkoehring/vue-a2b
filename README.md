@@ -76,9 +76,9 @@ it might be deferred from the parent components name attribute.
 
     Attention: Test name is mandatory!
 
-### Cookie Name
+### Storage options
 
-You can set storage method and name on initialization. Supported methods are `cookie` (the default) and `localStorage`:
+You can set storage method, name and expiry on initialization. Supported methods are `cookie` (the default) and `localStorage`.
 
 ``` js
 Vue.use(VueAB, {
@@ -88,6 +88,23 @@ Vue.use(VueAB, {
   }
 })
 ```
+
+The stored value expires after 30 days by default. This can be changed:
+
+``` js
+Vue.use(VueAB, {
+  storage: {
+    method: 'cookie',
+    expiry: 7 // one week until the cookie expires
+  }
+})
+```
+
+    Note: LocalStorage doesn't support expiration by default but the entries get
+    a timestamp and old entries will be ignored to make expiration possible.
+
+    Note: The expiry date is refreshed with every page visit. The entry only
+    expires, if the user doesn't come back in the specified time.
 
 ### Component Name
 
