@@ -1,6 +1,6 @@
 {
   "name": "vue-a2b",
-  "version": "0.1.0",
+  "version": "0.1.0-1",
   "description": "Split testing for Vue.js",
   "main": "./dist/index.js",
   "author": "Norman Köhring <norman.koehring@fromatob.com>",
@@ -9,7 +9,6 @@
     "dev": "cross-env NODE_ENV=development rollup -cw"
   },
   "dependencies": {
-    "vue": "^2.3.3"
   },
   "devDependencies": {
     "cross-env": "^5.0.0",
