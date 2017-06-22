@@ -2,19 +2,28 @@
 
 > split testing for Vuejs
 
-### Initialization
+## Usage
+
+Add the package to your project:
+
+``` bash
+yarn add vue-a2b
+# or
+npm install vue-a2b
+```
+
+…and register it to Vue:
+
 ``` js
 import VueAB from 'vue-a2b'
 Vue.use(VueAB)
 ```
 
-## Usage 
+*vue-a2b* uses [named slots](https://vuejs.org/v2/guide/components.html#Named-Slots) for defining test variations.
+Any amount of variations is supported (A/B/n). The the variation identifier should be used as slot name and can be any valid string.
+Selection chances are given as ratio. In the first example, **test A** has twice the chance to be selected over **test B**:
 
-*vue-a2b* uses [named slots](https://vuejs.org/v2/guide/components.html#Named-Slots) for different variations.
-Any amount of variations is supported (A/B/n). The the test identifier should be used as slot name and can be any valid string.
-Chances are given as ratio. In the first example, *test A* has twice the chance to be selected over *test B*:
-
-    Note: Chances are parsed as whole numbers, so instead of *2.5* and *1* use *5* and *2*.
+    Note: Selection chances are parsed as whole numbers, so instead of 2.5 and 1 use 5 and 2.
 
 ### minimal example
 
