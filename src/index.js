@@ -13,14 +13,14 @@ const VueSplitter = {
 
     Vue.component(options.component || 'split-test', {
       functional: true,
-      props: [ 'always', 'name' ],
-      beforeMount () {
-        if (!ctx.props.name && !ctx.parent.$options.name) {
-          throw "Split Test Error: The test name is mandatory!"
-        }
+      props: {
+        always: String,
+        name: String
       },
       render (h, ctx) {
         const name = ctx.props.name || ctx.parent.$options.name
+        if (!name) throw 'VueA2B Error: The test name is mandatory!'
+
         const variations = ctx.slots()
         const winner = storage.entry[name]
           || ctx.props.always

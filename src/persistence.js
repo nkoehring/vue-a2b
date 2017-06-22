@@ -5,9 +5,9 @@ import {
 
 export default {
   _store: null,
-  name: 'split-test',
-  method: 'cookie',
-  expiry: 30,
+  name: 'split-test', // name of cookie or localStorage entry
+  method: 'cookie',   // supported methods are 'cookie' and 'localStorage'
+  expiry: 30,         // ignore entries that weren't touched this amount of days
 
   _load () {
     if (this.method === 'cookie')
@@ -15,7 +15,7 @@ export default {
     else if (this.method === 'localStorage')
       this._store = getLocalStorage(this.name, this.expiry) || {}
     else {
-      console.warn("SPLIT TEST WARNING: No or invalid storage method. Data will not persist.")
+      console.warn("VueA2B WARNING: No or invalid storage method. Data will not persist.")
       this._store = {}
     }
     return this._store

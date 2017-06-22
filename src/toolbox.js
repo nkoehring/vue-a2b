@@ -3,10 +3,12 @@ function gcd (a, b) {
   return b ? gcd(b, a % b) : a
 }
 
+// gcd for n elements
 function gcdOfList (ary) {
   return ary.reduce((acc, v) => gcd(acc, v))
 }
 
+// create a list with test candidate that respects the selection chances
 function getCandidates (variations) {
   const equalChance = Math.round(100.0 / variations.length)
   let names = []
@@ -29,11 +31,13 @@ function getCandidates (variations) {
   }, [])
 }
 
+// return random element of array
 export function pickRandomlyFrom (array) {
   const index = Math.round(Math.random() * array.length)
   return array[index]
 }
 
+// pick a random candidate respecting the selection chances
 export function randomCandidate (variations) {
   const candidates = getCandidates(variations)
   return pickRandomlyFrom(candidates)
