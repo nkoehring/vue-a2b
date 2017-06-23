@@ -10,14 +10,13 @@ function gcdOfList (ary) {
 
 // create a list with test candidate that respects the selection chances
 function getCandidates (variations) {
-  const equalChance = Math.round(100.0 / variations.length)
   let names = []
   let chances = []
 
   variations.forEach(v => {
     if (v.data && v.data.slot) {
-      const chanceAttr = v.data.attrs ? v.data.attrs.chance : false
-      const chance = parseInt(chanceAttr) || equalChance
+      const chanceAttr = v.data.attrs ? v.data.attrs.chance : NaN
+      const chance = parseInt(chanceAttr) || 1
       names.push(v.data.slot)
       chances.push(chance)
     }

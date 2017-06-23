@@ -1,9 +1,8 @@
 import storage from './persistence'
 import { randomCandidate } from './toolbox'
 
-const VueSplitter = {
+const VueAB = {
   install (Vue, options = {}) {
-
     if (options.storage) {
       const cfg = options.storage
       if (cfg.name) storage.name = cfg.name
@@ -33,4 +32,4 @@ const VueSplitter = {
   }
 }
 
-export default VueSplitter
+export default VueAB
