@@ -21,8 +21,8 @@ const VueAB = {
         if (!name) throw 'VueA2B Error: The test name is mandatory!'
 
         const variations = ctx.slots()
-        const winner = storage.entry[name]
-          || ctx.props.always
+        const winner = ctx.props.always
+          || storage.entry[name]
           || randomCandidate(ctx.children)
 
         storage.entry = {name, winner}
