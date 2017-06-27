@@ -22,7 +22,7 @@ function getCandidates (variations) {
     }
   })
 
-  const divisor = gcdOfList(chances)
+  const divisor = chances.length ? gcdOfList(chances) : 1
 
   return names.reduce((result, name, i) => {
     const n = Math.round(chances[i] / divisor)
