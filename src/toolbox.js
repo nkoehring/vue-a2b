@@ -33,7 +33,7 @@ function getCandidates (variations) {
 
 // return random element of array
 export function pickRandomlyFrom (array) {
-  const index = Math.round(Math.random() * array.length)
+  const index = Math.floor(Math.random() * array.length)
   return array[index]
 }
 
