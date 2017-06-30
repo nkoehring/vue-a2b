@@ -1,9 +1,10 @@
 import {
   getCookie, writeCookie,
-  getLocalStorage, writeLocalStorage
+  getLocalStorage, writeLocalStorage,
+  pickRandomlyFrom
 } from './toolbox'
 
-export default {
+export const storage = {
   _store: null,
   name: 'split-test', // name of cookie or localStorage entry
   method: 'cookie',   // supported methods are 'cookie' and 'localStorage'
@@ -37,3 +38,10 @@ export default {
     this._save()
   }
 }
+
+export const selectAB = (name, variants) => {
+  const winner = storage.entry[name] || pickRandomlyFrom(variants)
+  storage.entry = {name, winner}
+  return winner
+}
+

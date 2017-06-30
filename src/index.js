@@ -1,4 +1,4 @@
-import storage from './persistence'
+import { storage } from './persistence'
 import { randomCandidate } from './toolbox'
 
 const VueAB = {
