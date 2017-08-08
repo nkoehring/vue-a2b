@@ -1,7 +1,7 @@
 import {
   getCookie, writeCookie,
   getLocalStorage, writeLocalStorage,
-  pickRandomlyFrom
+  randomCandidate
 } from './toolbox'
 
 export const storage = {
@@ -40,7 +40,7 @@ export const storage = {
 }
 
 export const selectAB = (name, variants) => {
-  const winner = storage.entry[name] || pickRandomlyFrom(variants)
+  const winner = storage.entry[name] || randomCandidate(variants)
   storage.entry = {name, winner}
   return winner
 }

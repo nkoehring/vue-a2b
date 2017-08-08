@@ -1,4 +1,4 @@
-import { storage } from './persistence'
+import { storage, selectAB } from './persistence'
 import { randomCandidate } from './toolbox'
 
 const VueAB = {
@@ -27,6 +27,12 @@ const VueAB = {
 
         storage.entry = {name, winner}
         return variations[winner]
+      }
+    })
+
+    Vue.mixin({
+      beforeCreate () {
+        this.$abtest = selectAB
       }
     })
   }

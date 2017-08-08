@@ -67,6 +67,45 @@ If more than one element is part of the test, use template tags:
 </template>
 ```
 
+## functional usage
+
+Since version `0.2` functional usage is supported. The component scope now has the `$abtest` method. It can be used to initialize an A/B test without the `<split-test>` component or to get the test value:
+
+To initialize a new test, `created()` is a good spot:
+``` js
+export default {
+  created () {
+    // creates a test 'fancy-bubbles' with 75% chance for even more bubbles
+    this.$abtest('fancy-bubbles', { bubbles: 25, lotsOfBubbles: 75 })
+  }
+}
+```
+
+To get a value, for example in data, just call `$abtest` again:
+``` js
+export default {
+  data () {
+    return {
+      more_bubbles: this.$abtest('fancy-bubbles') === 'lotsOfBubbles'
+    }
+  }
+}
+```
+
+The function is reachable for the template as well:
+
+```html
+<template>
+  <div :class='$abtest("fancy-bubbles")'>bubbles!</div>
+</template>
+
+<style>
+.lotsOfBubbles {
+  font-size: var(--extra-big);
+}
+</style>
+```
+
 ## Settings
 
 ### Test name

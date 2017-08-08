@@ -13,14 +13,21 @@ function getCandidates (variations) {
   let names = []
   let chances = []
 
-  variations.forEach(v => {
-    if (v.data && v.data.slot) {
-      const chanceAttr = v.data.attrs ? v.data.attrs.chance : NaN
-      const chance = parseInt(chanceAttr) || 1
-      names.push(v.data.slot)
-      chances.push(chance)
-    }
-  })
+  if (Array.isArray(variations)) { // assume list of VNodes
+    variations.forEach(v => {
+      if (v.data && v.data.slot) {
+        const chanceAttr = v.data.attrs ? v.data.attrs.chance : NaN
+        const chance = parseInt(chanceAttr) || 1
+        names.push(v.data.slot)
+        chances.push(chance)
+      }
+    })
+  } else { // assume name:chance object
+    Object.keys(variations).forEach(k => {
+      names.push(k)
+      chances.push(parseInt(variations[k]) || 1)
+    })
+  }
 
   const divisor = chances.length ? gcdOfList(chances) : 1
 
