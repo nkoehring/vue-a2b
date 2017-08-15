@@ -106,6 +106,26 @@ The function is reachable for the template as well:
 </style>
 ```
 
+### outside of components
+
+`vue-a2b` exports the abtest method among others, so it is possible to access it via:
+
+```js
+import { abtest } from 'vue-a2b'
+```
+
+Additionally `randomCandidate` is exported, which allows to get a randomly picked sample out of a list of VNodes or an object:
+
+```
+import { randomCandidate } from 'vue-a2b'
+
+// pics a random candidate foo, bar, baz with 75%, 20%, 5% chance respectively
+const candidate = randomCandidate({
+  foo: 75,
+  bar: 20,
+  baz: 5
+})
+
 ## Settings
 
 ### Test name

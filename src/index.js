@@ -2,6 +2,8 @@ import { storage, selectAB } from './persistence'
 import { randomCandidate } from './toolbox'
 
 const VueAB = {
+  abtest: selectAB,
+  randomCandidate,
   install (Vue, options = {}) {
     if (options.storage) {
       const cfg = options.storage
