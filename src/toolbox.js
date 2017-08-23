@@ -13,7 +13,10 @@ function getCandidates (variations) {
   let names = []
   let chances = []
 
-  if (Array.isArray(variations)) { // assume list of VNodes
+  if (typeof variations === 'undefined' || typeof variations === 'string') {
+    console.error('VueAB: variations must be Array || Object')
+  }
+  else if (Array.isArray(variations)) { // assume list of VNodes
     variations.forEach(v => {
       if (v.data && v.data.slot) {
         const chanceAttr = v.data.attrs ? v.data.attrs.chance : NaN
@@ -22,7 +25,9 @@ function getCandidates (variations) {
         chances.push(chance)
       }
     })
-  } else { // assume name:chance object
+  }
+  else if (variations !== null && typeof variations === 'object') {
+    // assume name:chance object
     Object.keys(variations).forEach(k => {
       names.push(k)
       chances.push(parseInt(variations[k]) || 1)
