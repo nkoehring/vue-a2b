@@ -1,6 +1,6 @@
 {
   "name": "vue-a2b",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Split testing for Vue.js",
   "main": "./dist/index.js",
   "author": "Norman Köhring <norman.koehring@fromatob.com>",
