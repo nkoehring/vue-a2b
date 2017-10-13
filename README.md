@@ -207,4 +207,4 @@ npm run build
 
 ## License
 
-MIT © fromAtoB GmbH <norman.koehring@fromatob.com>
+MIT © fromAtoB GmbH
