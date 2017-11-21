@@ -1,6 +1,6 @@
 import { storage, selectAB } from './persistence'
 import { randomCandidate } from './toolbox'
-
+import analytics from './analytics.js'
 const VueAB = {
   abtest: selectAB,
   randomCandidate,
@@ -28,6 +28,12 @@ const VueAB = {
           || randomCandidate(ctx.children)
 
         storage.entry = {name, winner}
+
+        if (analytics[options.analytics]) {
+          analytics[options.analytics](name, winner)
+        } else if (typeof options.analytics === "function"){
+          options.analytics(name, winner)
+        }
         return variations[winner]
       }
     })
