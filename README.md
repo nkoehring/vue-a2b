@@ -125,6 +125,7 @@ const candidate = randomCandidate({
   bar: 20,
   baz: 5
 })
+```
 
 ## Settings
 
