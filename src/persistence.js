@@ -34,6 +34,7 @@ export const storage = {
   },
 
   set entry ({name, winner}) {
+    if (!this._store) this._store = {};
     this._store[name] = winner
     this._save()
   }
