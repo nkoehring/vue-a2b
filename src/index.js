@@ -9,7 +9,7 @@ const VueAB = {
       const cfg = options.storage
       if (cfg.name) storage.name = cfg.name
       if (cfg.method) storage.method = cfg.method
-      if (cfg.expiry) storage.expiry = parseInt(expiry)
+      if (cfg.expiry) storage.expiry = parseInt(cfg.expiry)
     }
 
     Vue.component(options.component || 'split-test', {
