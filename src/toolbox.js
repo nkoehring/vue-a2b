@@ -55,7 +55,7 @@ export function randomCandidate (variations) {
   return pickRandomlyFrom(candidates)
 }
 
-function daysToMicroSeconds (days) {
+function daysToMilliseconds (days) {
   return days * 24 * 3600 * 1000
 }
 
@@ -75,22 +75,19 @@ export function getCookie (name) {
 
 export function writeCookie (name, data, expiry) {
   const d = new Date()
-  d.setTime(d.getTime() + daysToMicroSeconds(expiry))
+  d.setTime(d.getTime() + daysToMilliseconds(expiry))
 
   const options = `expires=${d.toUTCString()};path=/`
   data = encodeURIComponent(JSON.stringify(data))
   document.cookie = `${name}=${data};${options}`
 }
 
-export function getLocalStorage (name, expiry) {
-  const d = new Date()
-  d.setTime(d.getTime() + daysToMicroSeconds(expiry))
+export function getLocalStorage (name) {
   const entry = JSON.parse(localStorage.getItem(name))
-
-  return entry && entry.expires > d.getTime() ? entry : null
+  return entry && entry.expires > Date.now() ? entry : null
 }
 
 export function writeLocalStorage (name, value, expiry) {
-  value.expiry = new Date().getTime() + daysToMicroSeconds(expiry)
+  value.expires = Date.now() + daysToMilliseconds(expiry)
   localStorage.setItem(name, JSON.stringify(value))
 }
