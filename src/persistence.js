@@ -34,6 +34,9 @@ export const storage = {
   },
 
   set entry ({name, winner}) {
+    // avoid writing to non-existing storage when using "always" parameter
+    // see https://github.com/nkoehring/vue-a2b/pull/12
+    if (this._store === null) this._load()
     this._store[name] = winner
     this._save()
   }

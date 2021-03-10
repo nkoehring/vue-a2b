@@ -1,27 +1,26 @@
 {
   "name": "vue-a2b",
-  "version": "0.2.2",
-  "description": "Split testing for Vue.js",
+  "version": "0.3.0",
+  "description": "Split testing for Vue",
   "main": "./dist/index.js",
-  "author": "Norman Köhring <norman.koehring@fromatob.com>",
+  "author": "Norman Köhring <n@koehr.in>",
   "scripts": {
-    "build": "cross-env NODE_ENV=production rollup -c",
-    "dev": "cross-env NODE_ENV=development rollup -cw"
-  },
-  "dependencies": {
+    "build": "node esbuild.prod.js"
   },
   "devDependencies": {
-    "cross-env": "^5.0.0",
-    "rollup": "^0.41.4",
-    "rollup-plugin-alias": "^1.3.1",
-    "rollup-plugin-buble": "^0.15.0",
-    "rollup-plugin-butternut": "^0.1.0",
-    "rollup-plugin-commonjs": "^8.0.2",
-    "rollup-plugin-livereload": "^0.4.0",
-    "rollup-plugin-node-globals": "^1.1.0",
-    "rollup-plugin-node-resolve": "^3.0.0",
-    "rollup-plugin-serve": "^0.3.0",
-    "rollup-plugin-vue": "^2.4.0",
-    "rollup-watch": "^3.2.2"
+    "@vue/test-utils": "^1.1.3",
+    "esbuild": "^0.8.53",
+    "vue-jest": "^3.0.7"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!**/node_modules/**"
+    ]
   }
 }
