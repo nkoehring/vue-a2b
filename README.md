@@ -175,6 +175,24 @@ Vue.use(VueAB, {
     Note: The expiry date is refreshed with every page visit. The entry only
     expires, if the user doesn't come back in the specified time.
 
+### Analytics options
+
+You can set an ***analytics handler***, on initialization. The only internally supported option currently is mixpanel, that will set a super property on the user like 'AB [test name]' equal to the wining slot name
+
+``` js
+Vue.use(VueAB, {
+  analytics: 'mixpanel'
+})
+```
+
+If you want to create your own ***analytics handler*** you can simply pass a function
+
+``` js
+Vue.use(VueAB, {
+  analytics: (name, winner) => console.log('AB Test', name, winner)
+})
+```
+
 ### Component Name
 
 By default `<split-test>` is the component that wraps a new test. This name can be overwritten on initialization:
