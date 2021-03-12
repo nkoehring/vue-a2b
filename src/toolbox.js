@@ -9,7 +9,7 @@ function gcdOfList (ary) {
 }
 
 // create a list with test candidate that respects the selection chances
-function getCandidates (variations) {
+export function getCandidates (variations) {
   let names = []
   let chances = []
 
