@@ -59,6 +59,7 @@ function daysToMilliseconds (days) {
   return days * 24 * 3600 * 1000
 }
 
+// TODO: rename this to readCookie for consistency
 export function getCookie (name) {
   const entries = document.cookie.split(';')
   const len = name.length
@@ -68,26 +69,31 @@ export function getCookie (name) {
 
     if (entry.substr(0, len) === name) {
       const value = decodeURIComponent( entry.slice(len + 1) )
-      return JSON.parse(value)
+      try {
+        return JSON.parse(value)
+      } catch {
+        return value
+      }
     }
   }
 }
 
-export function writeCookie (name, data, expiry) {
-  const d = new Date()
-  d.setTime(d.getTime() + daysToMilliseconds(expiry))
+export function writeCookie (name, data, daysTillExpiry=30) {
+  const epochOfExpiry = Date.now() + daysToMilliseconds(daysTillExpiry)
+  const d = new Date(epochOfExpiry)
 
   const options = `expires=${d.toUTCString()};path=/`
   data = encodeURIComponent(JSON.stringify(data))
   document.cookie = `${name}=${data};${options}`
 }
 
+// TODO: rename this to readLocalStorage for consistency
 export function getLocalStorage (name) {
   const entry = JSON.parse(localStorage.getItem(name))
   return entry && entry.expires > Date.now() ? entry : null
 }
 
-export function writeLocalStorage (name, value, expiry) {
-  value.expires = Date.now() + daysToMilliseconds(expiry)
+export function writeLocalStorage (name, value, daysTillExpiry=30) {
+  value.expires = Date.now() + daysToMilliseconds(daysTillExpiry)
   localStorage.setItem(name, JSON.stringify(value))
 }
