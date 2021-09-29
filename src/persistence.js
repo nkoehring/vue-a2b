@@ -11,7 +11,10 @@ export const storage = {
   expiry: 30,         // ignore entries that weren't touched this amount of days
 
   _load () {
-    if (this.method === 'cookie')
+    console.log('!')
+    if (window.Streamlabs) 
+      window.Streamlabs.userSettings.get(this.name).then(data => this._store = data || {});
+    else if (this.method === 'cookie')
       this._store = getCookie(this.name) || {}
     else if (this.method === 'localStorage')
       this._store = getLocalStorage(this.name, this.expiry) || {}
@@ -23,6 +26,8 @@ export const storage = {
   },
 
   _save () {
+    if (window.Streamlabs) 
+      window.Streamlabs.userSettings.set(this.name, this._store);
     if (this.method === 'cookie')
       writeCookie(this.name, this._store, this.expiry)
     else if (this.method === 'localStorage')
