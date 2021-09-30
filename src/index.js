@@ -18,13 +18,13 @@ const VueAB = {
         always: String,
         name: String
       },
-      render (h, ctx) {
+      async render (h, ctx) {
         const name = ctx.props.name || ctx.parent.$options.name
         if (!name) throw 'VueA2B Error: The test name is mandatory!'
 
         const variations = ctx.slots()
         const winner = ctx.props.always
-          || storage.entry[name]
+          || await storage.entry[name]
           || randomCandidate(ctx.children)
 
         storage.entry = {name, winner}
@@ -33,8 +33,8 @@ const VueAB = {
     })
 
     Vue.mixin({
-      beforeCreate () {
-        this.$abtest = selectAB
+      async beforeCreate () {
+        this.$abtest = await selectAB;
       }
     })
   }

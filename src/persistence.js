@@ -12,7 +12,11 @@ export const storage = {
 
   _load () {
     if (window.streamlabsOBS) 
-      window.Streamlabs.userSettings.get(this.name).then(data => this._store = data || {});
+      window.Streamlabs.userSettings.get(this.name).then(data => {
+        this._store = data || {};
+        return this._store;
+      }
+        );
     else if (this.method === 'cookie')
       this._store = getCookie(this.name) || {}
     else if (this.method === 'localStorage')
@@ -24,9 +28,9 @@ export const storage = {
     return this._store
   },
 
-  _save () {
+ async _save () {
     if (window.streamlabsOBS) 
-      window.Streamlabs.userSettings.set(this.name, this._store);
+      await window.Streamlabs.userSettings.set(this.name, this._store);
     if (this.method === 'cookie')
       writeCookie(this.name, this._store, this.expiry)
     else if (this.method === 'localStorage')
@@ -46,8 +50,8 @@ export const storage = {
   }
 }
 
-export const selectAB = (name, variants) => {
-  const winner = storage.entry[name] || randomCandidate(variants)
+export const selectAB = async (name, variants) => {
+  const winner = await storage.entry[name] || randomCandidate(variants);
   storage.entry = {name, winner}
   return winner
 }
